@@ -1,7 +1,11 @@
 import Image from "next/image";
+import Body from "./components/Body";
 
 export default function Home() {
   return (
-    <h1>Pixels Art</h1>
+    <div>
+      <h1>Pixels Art</h1>
+      <Body />
+    </div>
   );
 }
