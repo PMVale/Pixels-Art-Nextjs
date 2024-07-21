@@ -1,11 +1,27 @@
 import React from 'react'
 
-const OptionsMenu = () => {
+type settingsType = {
+    boardSize: string,
+    paletteSize: string
+}
+
+type propTypes = {
+    setMenuActive: React.Dispatch<React.SetStateAction<boolean>>,
+    setSettings: React.Dispatch<React.SetStateAction<settingsType>>
+}
+
+const OptionsMenu: React.FC<propTypes> = ({setMenuActive, setSettings}) => {
 
     const [boardSize, setBoardSize] = React.useState('5');
     const [paletteSize, setPaletteSize] = React.useState('4');
     const [customBoardSize, setCustomBoardSize] = React.useState('5');
     const [customPalette, setCustomPalette] = React.useState('4');
+
+    const handleStartBtn = () => {
+        const currentSettings = {boardSize, paletteSize};
+        setSettings(currentSettings)
+        setMenuActive(false);
+    }
 
   return (
     <section>
@@ -38,6 +54,7 @@ const OptionsMenu = () => {
                 {parseInt(customPalette) % 2 !== 0 && <span>Chosen number for palette must be divisible by 2</span>}
             </label>
         </div>
+        <button onClick={handleStartBtn}>Begin</button>
     </section>
   )
 }
