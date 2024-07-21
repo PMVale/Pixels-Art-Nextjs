@@ -19,7 +19,13 @@ const OptionsMenu: React.FC<propTypes> = ({setMenuActive, setSettings}) => {
 
     const handleStartBtn = () => {
         const currentSettings = {boardSize, paletteSize};
-        setSettings(currentSettings)
+        if (boardSize === 'custom') {
+            currentSettings.boardSize = customBoardSize;
+        }
+        if (paletteSize === 'custom') {
+            currentSettings.paletteSize = customPalette;
+        }
+        setSettings(currentSettings);
         setMenuActive(false);
     }
 
