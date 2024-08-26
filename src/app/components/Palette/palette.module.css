@@ -1,0 +1,15 @@
+.palette {
+    border: 1px solid black;
+    display: flex;
+    /* background-color: blue; */
+}
+
+.paletteColor {
+    border: 2px solid black;
+    margin: 1px;
+    padding: 20px 50px;
+}
+
+.selected {
+    border: 5px solid red;
+}

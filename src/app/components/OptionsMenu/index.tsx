@@ -60,6 +60,7 @@ const OptionsMenu: React.FC<propTypes> = ({setMenuActive, setSettings}) => {
                 {parseInt(customPalette) % 2 !== 0 && <span>Chosen number for palette must be divisible by 2</span>}
             </label>
         </div>
+        <button onClick={() => setMenuActive(false)}>Undo</button>
         <button onClick={handleStartBtn}>Begin</button>
     </section>
   )

@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react'
-import OptionsMenu from './OptionsMenu'
+import OptionsMenu from '../OptionsMenu'
+import Board from '../Board'
 
 const Body = () => {
   const defaultSettings = {
@@ -12,7 +13,9 @@ const Body = () => {
 
   return (
     <main>
+        {!menuActive && <button onClick={() => setMenuActive(!menuActive)}>Settings</button>}
         {menuActive && <OptionsMenu setSettings={setSettings} setMenuActive={setMenuActive} />}
+        {!menuActive && <Board {...settings} />}
     </main>
   )
 }
