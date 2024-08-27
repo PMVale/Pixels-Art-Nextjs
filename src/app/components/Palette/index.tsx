@@ -36,8 +36,8 @@ const Palette: React.FC<PaletteProps> = ({paletteSize, selectedColor, setSelecte
                   className={isSelectedColor(index)}
                   style={{backgroundColor: paletteColors[index]}}
                   onClick={(event) => {
-                    const target = event.target as HTMLDivElement
-                    setSelectedColor(target.style.backgroundColor)
+                    const target = event.target as HTMLDivElement;
+                    setSelectedColor(target.style.backgroundColor);
                   }}
                 />
             ))}
