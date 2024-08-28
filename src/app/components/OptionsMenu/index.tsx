@@ -7,10 +7,11 @@ type settingsType = {
 
 type propTypes = {
     setMenuActive: React.Dispatch<React.SetStateAction<boolean>>,
-    setSettings: React.Dispatch<React.SetStateAction<settingsType>>
+    setSettings: React.Dispatch<React.SetStateAction<settingsType>>,
+    setLoadActive: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const OptionsMenu: React.FC<propTypes> = ({setMenuActive, setSettings}) => {
+const OptionsMenu: React.FC<propTypes> = ({setMenuActive, setSettings, setLoadActive}) => {
 
     const [boardSize, setBoardSize] = React.useState('5');
     const [paletteSize, setPaletteSize] = React.useState('4');
@@ -27,6 +28,7 @@ const OptionsMenu: React.FC<propTypes> = ({setMenuActive, setSettings}) => {
         }
         setSettings(currentSettings);
         setMenuActive(false);
+        setLoadActive(false);
     }
 
   return (
