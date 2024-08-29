@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import OptionsMenu from '../OptionsMenu'
 import Board from '../Board'
 import LoadMenu from '../LoadMenu'
@@ -9,9 +9,15 @@ const Body = () => {
     boardSize: '5',
     paletteSize: '4'
   };
+  const defaultSavedBoard = Array.from({length: (parseInt(defaultSettings.boardSize) ** 2)}, (item) => item = 'white');
+  const defaultSavedPalette = Array.from({length: (parseInt(defaultSettings.paletteSize))}, (item) => item = 'none');
+
   const [menuActive, setMenuActive] = useState(true);
   const [settings, setSettings] = useState(defaultSettings);
   const [loadActive, setLoadActive] = useState(false);
+  const [savedBoard, setSavedBoard] = useState(defaultSavedBoard);
+  const [savedPalette, setSavedPalette] = useState(defaultSavedPalette);
+  const [newLoad, setNewLoad] = useState(false);
 
   const handleLoadBtn = () => {
     setLoadActive(true);
@@ -23,13 +29,20 @@ const Body = () => {
     setLoadActive(false);
   }
 
+  useEffect(() => {
+    const dataCheck = JSON.parse(localStorage.getItem('saveData') as string);
+    if (!dataCheck) {
+      localStorage.setItem('saveData', JSON.stringify([]));
+    }
+  }, [])
+
   return (
     <main>
         {!menuActive && <button onClick={handleSettingsBtn}>Settings</button>}
         <button onClick={handleLoadBtn}>Load</button>
-        {menuActive && <OptionsMenu setSettings={setSettings} setMenuActive={setMenuActive} setLoadActive={setLoadActive} />}
-        {!menuActive && !loadActive && <Board {...settings} />}
-        {loadActive && <LoadMenu setSettings={setSettings} />}
+        {menuActive && <OptionsMenu setSettings={setSettings} setMenuActive={setMenuActive} setLoadActive={setLoadActive} setSavedBoard={setSavedBoard} setSavedPalette={setSavedPalette} setNewLoad={setNewLoad} />}
+        {!menuActive && !loadActive && <Board {...settings} savedBoard={savedBoard} savedPalette={savedPalette} setSavedBoard={setSavedBoard} setSavedPalette={setSavedPalette} newLoad={newLoad} setNewLoad={setNewLoad} />}
+        {loadActive && <LoadMenu setSettings={setSettings} setSavedBoard={setSavedBoard} setSavedPalette={setSavedPalette} setLoadActive={setLoadActive} setNewLoad={setNewLoad} />}
     </main>
   )
 }

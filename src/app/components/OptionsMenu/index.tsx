@@ -8,10 +8,13 @@ type settingsType = {
 type propTypes = {
     setMenuActive: React.Dispatch<React.SetStateAction<boolean>>,
     setSettings: React.Dispatch<React.SetStateAction<settingsType>>,
-    setLoadActive: React.Dispatch<React.SetStateAction<boolean>>
+    setLoadActive: React.Dispatch<React.SetStateAction<boolean>>,
+    setSavedPalette: React.Dispatch<React.SetStateAction<string[]>>,
+    setSavedBoard: React.Dispatch<React.SetStateAction<string[]>>,
+    setNewLoad: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
-const OptionsMenu: React.FC<propTypes> = ({setMenuActive, setSettings, setLoadActive}) => {
+const OptionsMenu: React.FC<propTypes> = ({setMenuActive, setSettings, setLoadActive, setSavedBoard, setNewLoad}) => {
 
     const [boardSize, setBoardSize] = React.useState('5');
     const [paletteSize, setPaletteSize] = React.useState('4');
@@ -29,6 +32,8 @@ const OptionsMenu: React.FC<propTypes> = ({setMenuActive, setSettings, setLoadAc
         setSettings(currentSettings);
         setMenuActive(false);
         setLoadActive(false);
+        setSavedBoard(Array.from({length: (parseInt(boardSize) ** 2)}, (item) => item = 'white'));
+        setNewLoad(false);
     }
 
   return (
