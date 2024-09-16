@@ -10,15 +10,17 @@ type PaletteProps = {
     setNewLoad: React.Dispatch<React.SetStateAction<boolean>>,
     savedPalette: string[],
     paletteColors: string[],
-    setPaletteColors: React.Dispatch<React.SetStateAction<string[]>>
+    setPaletteColors: React.Dispatch<React.SetStateAction<string[]>>,
+    setUndoActive: React.Dispatch<React.SetStateAction<boolean>>,
+    undoActive: boolean
 }
 
-const Palette: React.FC<PaletteProps> = ({paletteSize, selectedColor, setSelectedColor, setSavedPalette, newLoad, setNewLoad, savedPalette, paletteColors, setPaletteColors}) => {
+const Palette: React.FC<PaletteProps> = ({paletteSize, selectedColor, setSelectedColor, setSavedPalette, newLoad, setNewLoad, savedPalette, paletteColors, setPaletteColors, undoActive, setUndoActive}) => {
   
   // const [paletteColors, setPaletteColors] = useState<string[]>(['rgb(0, 0, 0)','rgb(0, 0, 0)','rgb(0, 0, 0)', 'rgb(0, 0, 0)']);
   
   useEffect(() => {
-    if (!newLoad) {
+    if (!newLoad && !undoActive) {
       const defaultPalette: string[] = Array.from({length: (parseInt(paletteSize))});
       defaultPalette[0] = 'rgb(0, 0, 0)';
       defaultPalette.forEach((_, index) => {
@@ -28,9 +30,11 @@ const Palette: React.FC<PaletteProps> = ({paletteSize, selectedColor, setSelecte
       });
       setSavedPalette(defaultPalette);
       setPaletteColors(defaultPalette);
-    } else {
+    } else if (newLoad) {
       setPaletteColors(savedPalette);
       setNewLoad(false)
+    } else {
+      setUndoActive(false);
     }
   }, []);
 

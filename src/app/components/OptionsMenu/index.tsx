@@ -12,10 +12,11 @@ type propTypes = {
     setSavedPalette: React.Dispatch<React.SetStateAction<string[]>>,
     setSavedBoard: React.Dispatch<React.SetStateAction<string[]>>,
     setNewLoad: React.Dispatch<React.SetStateAction<boolean>>,
-    setPaletteColors: React.Dispatch<React.SetStateAction<string[]>>
+    setPaletteColors: React.Dispatch<React.SetStateAction<string[]>>,
+    setUndoActive: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const OptionsMenu: React.FC<propTypes> = ({setMenuActive, setSettings, setLoadActive, setSavedBoard, setNewLoad, setPaletteColors}) => {
+const OptionsMenu: React.FC<propTypes> = ({setMenuActive, setSettings, setLoadActive, setSavedBoard, setNewLoad, setPaletteColors, setUndoActive}) => {
 
     const [boardSize, setBoardSize] = React.useState('5');
     const [paletteSize, setPaletteSize] = React.useState('4');
@@ -69,7 +70,7 @@ const OptionsMenu: React.FC<propTypes> = ({setMenuActive, setSettings, setLoadAc
                 {parseInt(customPalette) % 2 !== 0 && <span>Chosen number for palette must be divisible by 2</span>}
             </label>
         </div>
-        <button onClick={() => setMenuActive(false)}>Undo</button>
+        <button onClick={() => {setMenuActive(false), setUndoActive(true)}}>Undo</button>
         <button onClick={handleStartBtn}>Begin</button>
     </section>
   )

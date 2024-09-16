@@ -20,6 +20,7 @@ const Body = () => {
   const [newLoad, setNewLoad] = useState(false);
   const defaultPalette = Array.from({length: (parseInt(settings.paletteSize))}, (item) => item = 'rgb(0, 0, 0)')
   const [paletteColors, setPaletteColors] = useState<string[]>(defaultPalette);
+  const [undoActive, setUndoActive] = useState(false);
 
   const handleLoadBtn = () => {
     setLoadActive(true);
@@ -50,7 +51,8 @@ const Body = () => {
             setSavedBoard={setSavedBoard} 
             setSavedPalette={setSavedPalette} 
             setNewLoad={setNewLoad}
-            setPaletteColors={setPaletteColors} 
+            setPaletteColors={setPaletteColors}
+            setUndoActive={setUndoActive} 
           />}
         {!menuActive && !loadActive && 
           <Board 
@@ -63,6 +65,8 @@ const Body = () => {
             setNewLoad={setNewLoad}
             paletteColors={paletteColors}
             setPaletteColors={setPaletteColors}
+            undoActive={undoActive}
+            setUndoActive={setUndoActive}
           />}
         {loadActive && 
           <LoadMenu 

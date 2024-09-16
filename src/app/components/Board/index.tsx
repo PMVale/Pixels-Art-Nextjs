@@ -13,10 +13,12 @@ type settingsType = {
     newLoad: boolean,
     setNewLoad: React.Dispatch<React.SetStateAction<boolean>>,
     paletteColors: string[],
-    setPaletteColors: React.Dispatch<React.SetStateAction<string[]>>
+    setPaletteColors: React.Dispatch<React.SetStateAction<string[]>>,
+    setUndoActive: React.Dispatch<React.SetStateAction<boolean>>,
+    undoActive: boolean
 }
 
-const Board: React.FC<settingsType> = ({boardSize, paletteSize, savedBoard, savedPalette, setSavedBoard, setSavedPalette, newLoad, setNewLoad, paletteColors, setPaletteColors}) => {
+const Board: React.FC<settingsType> = ({boardSize, paletteSize, savedBoard, savedPalette, setSavedBoard, setSavedPalette, newLoad, setNewLoad, paletteColors, setPaletteColors, undoActive, setUndoActive}) => {
 
   // const defaultSavedBoard = Array.from({length: (parseInt(boardSize) ** 2)}, (item) => item = 'white');
   // const defaultSavedPalette = Array.from({length: (parseInt(paletteSize))}, (item) => item = 'none');
@@ -39,7 +41,9 @@ const Board: React.FC<settingsType> = ({boardSize, paletteSize, savedBoard, save
             setSelectedColor={setSelectedColor} 
             setSavedPalette={setSavedPalette} 
             newLoad={newLoad} setNewLoad={setNewLoad} 
-            savedPalette={savedPalette} 
+            savedPalette={savedPalette}
+            undoActive={undoActive}
+            setUndoActive={setUndoActive} 
           />
         </section>
         <section className={styles.pixelBoard}>
