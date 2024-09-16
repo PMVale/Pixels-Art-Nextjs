@@ -12,9 +12,11 @@ type settingsType = {
     setSavedBoard: React.Dispatch<React.SetStateAction<string[]>>,
     newLoad: boolean,
     setNewLoad: React.Dispatch<React.SetStateAction<boolean>>,
+    paletteColors: string[],
+    setPaletteColors: React.Dispatch<React.SetStateAction<string[]>>
 }
 
-const Board: React.FC<settingsType> = ({boardSize, paletteSize, savedBoard, savedPalette, setSavedBoard, setSavedPalette, newLoad, setNewLoad}) => {
+const Board: React.FC<settingsType> = ({boardSize, paletteSize, savedBoard, savedPalette, setSavedBoard, setSavedPalette, newLoad, setNewLoad, paletteColors, setPaletteColors}) => {
 
   // const defaultSavedBoard = Array.from({length: (parseInt(boardSize) ** 2)}, (item) => item = 'white');
   // const defaultSavedPalette = Array.from({length: (parseInt(paletteSize))}, (item) => item = 'none');
@@ -22,7 +24,6 @@ const Board: React.FC<settingsType> = ({boardSize, paletteSize, savedBoard, save
   const [selectedColor, setSelectedColor] = useState('black');
   // const [savedBoard, setSavedBoard] = useState(defaultSavedBoard);
   // const [savedPalette, setSavedPalette] = useState(defaultSavedPalette);
-
   return (
     <div className='flex-col'>
         {`Board + ${boardSize}`}
@@ -30,7 +31,16 @@ const Board: React.FC<settingsType> = ({boardSize, paletteSize, savedBoard, save
           <SaveMenu savedBoard={savedBoard} savedPalette={savedPalette} boardSize={boardSize} paletteSize={paletteSize} />
         </section>
         <section>
-          <Palette paletteSize={paletteSize} selectedColor={selectedColor} setSelectedColor={setSelectedColor} setSavedPalette={setSavedPalette} newLoad={newLoad} setNewLoad={setNewLoad} savedPalette={savedPalette} />
+          <Palette
+            paletteColors={paletteColors}
+            setPaletteColors={setPaletteColors}
+            paletteSize={paletteSize} 
+            selectedColor={selectedColor} 
+            setSelectedColor={setSelectedColor} 
+            setSavedPalette={setSavedPalette} 
+            newLoad={newLoad} setNewLoad={setNewLoad} 
+            savedPalette={savedPalette} 
+          />
         </section>
         <section className={styles.pixelBoard}>
             {Array.from({length: (parseInt(boardSize) ** 2)}, (_, index) => (
