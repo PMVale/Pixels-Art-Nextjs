@@ -61,13 +61,23 @@ const Palette: React.FC<PaletteProps> = ({paletteSize, selectedColor, setSelecte
   };
 
   const rgbToHex = (rgb: string): string => {
-    console.log(rgb)
     const result = rgb.match(/\d+/g);
     if (!result) return '#000000';
     const r = parseInt(result[0]).toString(16).padStart(2, '0');
     const g = parseInt(result[1]).toString(16).padStart(2, '0');
     const b = parseInt(result[2]).toString(16).padStart(2, '0');
     return `#${r}${g}${b}`;
+  };
+
+  const randomizeColor = (index: number) => {
+    const newColors = [...paletteColors];
+    const prevColor = newColors[index];
+    newColors[index] = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
+    setPaletteColors(newColors);
+    setSavedPalette(newColors);
+    if (prevColor === selectedColor) {
+      setSelectedColor(newColors[index]);
+    };
   };
 
 
@@ -90,6 +100,7 @@ const Palette: React.FC<PaletteProps> = ({paletteSize, selectedColor, setSelecte
                     value={rgbToHex(paletteColors[index])} 
                     onChange={({target})=> handleColorInput(target.value, index)} 
                   />
+                  <button onClick={() => randomizeColor(index)}>Random</button>
                 </div>
             ))}
     </div>
