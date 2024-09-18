@@ -3,3 +3,67 @@
   margin: 1px;
   padding: 15px 15px;
 }
+
+.pixelFive {
+  border: 2px solid black;
+  margin: 1px;
+  padding: 10px;
+}
+
+.pixelTen {
+  border: 2px solid black;
+  margin: 1px;
+  padding: 6px;
+}
+
+.pixelFifteen {
+  border: 2px solid black;
+  margin: 1px;
+  padding: 4px;
+}
+
+.pixelCustom {
+  border: 2px solid black;
+  margin: 1px;
+  padding: 2px;
+}
+
+.boardFive {
+  size: 10px;
+  max-width: 180px;
+  max-height: 100px;
+  padding: 5px 15px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+}
+
+.boardTen {
+  size: 10px;
+  max-width: 210px;
+  max-height: 100px;
+  padding: 5px 15px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 100px;
+}
+
+.boardFifteen {
+  size: 10px;
+  max-width: 250px;
+  max-height: 100px;
+  padding: 15px 15px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 140px;
+}
+
+.boardCustom {
+  size: 10px;
+  max-width: 230px;
+  max-height: 100px;
+  padding: 15px 15px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 130px;
+}

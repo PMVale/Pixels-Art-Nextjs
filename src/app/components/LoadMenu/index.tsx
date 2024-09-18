@@ -43,18 +43,60 @@ const LoadMenu: React.FC<loadProps> = ({setSettings, setSavedBoard, setSavedPale
     setPaletteColors(Array.from({length: (parseInt(dataToLoad.paletteSize))}, (item) => item = 'rgb(0, 0, 0)'))
   };
 
+  const handleBoardClass = (boardSize: string):string => {
+    let classSetting = '';
+    switch (boardSize) {
+      case '5':
+        classSetting = `${styles.boardFive}`;
+        break;
+      case '10':
+        classSetting = `${styles.boardTen}`;
+        break;
+      case '15':
+        classSetting = `${styles.boardFifteen}`;
+        break;
+      default:
+        classSetting = `${styles.boardCustom}`;
+        break;
+    }
+    return classSetting;
+  };
+
+  const handlePixelClass = (boardSize: string):string => {
+    let pixelSetting = '';
+    switch (boardSize) {
+      case '5':
+        pixelSetting = `${styles.pixelFive}`;
+        break;
+      case '10':
+        pixelSetting = `${styles.pixelTen}`;
+        break;
+      case '15':
+        pixelSetting = `${styles.pixelFifteen}`;
+        break;
+      default:
+        pixelSetting = `${styles.pixelCustom}`;
+        break;
+    };
+    return pixelSetting;
+  };
+
   return (
-    <div>
-      {savedData.length === 0 ? <h3>There is no saved boards.</h3> : savedData.map((item, index) => 
-        <div key={`${item.saveName}`}>
-          <span>{item.saveName}</span>
-          <span>{item.boardSize}</span>
-          <span>{item.paletteSize}</span>
+    <div className='flex-col'>
+      {savedData.length === 0 ? <h3>There are no saved boards.</h3> : savedData.map((item, index) => 
+        <div key={`${item.saveName}${index}`}>
+          <p>{`Name: ${item.saveName}`}</p>
+          <p>{`Size of board: ${item.boardSize}`}</p>
+          <p>{`Size of palette: ${item.paletteSize}`}</p>
           <div className='flex'>
             <p>Palette</p>
             {item.palette.map((color, index) => <div key={`color ${index}`} style={{backgroundColor: color}} className={styles.paletteColor}></div>)}
           </div>
-          <p>Board Preview</p>
+          {parseInt(item.boardSize) > 15 ? <p>Preview not available for custom board sizes</p> : (
+            <div className={handleBoardClass(item.boardSize)}>
+            {item.board.map((pixel, index) => <div key={`pixel${index}`} style={{backgroundColor: pixel}} className={handlePixelClass(item.boardSize)}></div>)}
+            </div>
+          )}
           <button onClick={() => handleLoadBtn(index)}>Load</button>
         </div>)}
     </div>
