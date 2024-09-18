@@ -12,7 +12,6 @@ type loadProps = {
   setSavedBoard: React.Dispatch<React.SetStateAction<string[]>>,
   setLoadActive: React.Dispatch<React.SetStateAction<boolean>>,
   setNewLoad: React.Dispatch<React.SetStateAction<boolean>>,
-  setPaletteColors: React.Dispatch<React.SetStateAction<string[]>>
 };
 
 type savedType = {
@@ -23,7 +22,7 @@ type savedType = {
   palette: string[]
 };
 
-const LoadMenu: React.FC<loadProps> = ({setSettings, setSavedBoard, setSavedPalette, setLoadActive, setNewLoad, setPaletteColors}) => {
+const LoadMenu: React.FC<loadProps> = ({setSettings, setSavedBoard, setSavedPalette, setLoadActive, setNewLoad}) => {
   const [savedData, setSavedData] = useState<savedType[]>([]);
 
   useEffect(() => {
@@ -40,7 +39,6 @@ const LoadMenu: React.FC<loadProps> = ({setSettings, setSavedBoard, setSavedPale
     setSettings({boardSize: dataToLoad.boardSize, paletteSize: dataToLoad.paletteSize});
     setLoadActive(false);
     setNewLoad(true);
-    setPaletteColors(Array.from({length: (parseInt(dataToLoad.paletteSize))}, (item) => item = 'rgb(0, 0, 0)'))
   };
 
   const handleBoardClass = (boardSize: string):string => {

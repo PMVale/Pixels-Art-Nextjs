@@ -12,13 +12,11 @@ type settingsType = {
     setSavedBoard: React.Dispatch<React.SetStateAction<string[]>>,
     newLoad: boolean,
     setNewLoad: React.Dispatch<React.SetStateAction<boolean>>,
-    paletteColors: string[],
-    setPaletteColors: React.Dispatch<React.SetStateAction<string[]>>,
     setUndoActive: React.Dispatch<React.SetStateAction<boolean>>,
     undoActive: boolean
 }
 
-const Board: React.FC<settingsType> = ({boardSize, paletteSize, savedBoard, savedPalette, setSavedBoard, setSavedPalette, newLoad, setNewLoad, paletteColors, setPaletteColors, undoActive, setUndoActive}) => {
+const Board: React.FC<settingsType> = ({boardSize, paletteSize, savedBoard, savedPalette, setSavedBoard, setSavedPalette, newLoad, setNewLoad, undoActive, setUndoActive}) => {
 
   // const defaultSavedBoard = Array.from({length: (parseInt(boardSize) ** 2)}, (item) => item = 'white');
   // const defaultSavedPalette = Array.from({length: (parseInt(paletteSize))}, (item) => item = 'none');
@@ -34,8 +32,6 @@ const Board: React.FC<settingsType> = ({boardSize, paletteSize, savedBoard, save
         </section>
         <section>
           <Palette
-            paletteColors={paletteColors}
-            setPaletteColors={setPaletteColors}
             paletteSize={paletteSize} 
             selectedColor={selectedColor} 
             setSelectedColor={setSelectedColor} 

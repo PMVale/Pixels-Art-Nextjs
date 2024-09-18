@@ -9,15 +9,13 @@ type PaletteProps = {
     setSavedPalette: React.Dispatch<React.SetStateAction<string[]>>,
     setNewLoad: React.Dispatch<React.SetStateAction<boolean>>,
     savedPalette: string[],
-    paletteColors: string[],
-    setPaletteColors: React.Dispatch<React.SetStateAction<string[]>>,
     setUndoActive: React.Dispatch<React.SetStateAction<boolean>>,
     undoActive: boolean
 }
 
-const Palette: React.FC<PaletteProps> = ({paletteSize, selectedColor, setSelectedColor, setSavedPalette, newLoad, setNewLoad, savedPalette, paletteColors, setPaletteColors, undoActive, setUndoActive}) => {
+const Palette: React.FC<PaletteProps> = ({paletteSize, selectedColor, setSelectedColor, setSavedPalette, newLoad, setNewLoad, savedPalette, undoActive, setUndoActive}) => {
   
-  // const [paletteColors, setPaletteColors] = useState<string[]>(['rgb(0, 0, 0)','rgb(0, 0, 0)','rgb(0, 0, 0)', 'rgb(0, 0, 0)']);
+  const [paletteColors, setPaletteColors] = useState<string[]>([]);
   
   useEffect(() => {
     if (!newLoad && !undoActive) {
@@ -65,6 +63,9 @@ const Palette: React.FC<PaletteProps> = ({paletteSize, selectedColor, setSelecte
   };
 
   const rgbToHex = (rgb: string): string => {
+    if (!rgb) {
+      rgb = 'rgb(0, 0, 0)';
+    }
     const result = rgb.match(/\d+/g);
     if (!result) return '#000000';
     const r = parseInt(result[0]).toString(16).padStart(2, '0');
